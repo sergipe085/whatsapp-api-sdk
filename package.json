@@ -1,7 +1,7 @@
 {
-  "name": "whatsapp-sdk",
+  "name": "@sb/whatsapp-api-sdk",
   "version": "1.0.0",
-  "description": "SDK para WhatsApp Business API usando Node.js e TypeScript",
+  "description": "SDK for WhatsApp Business API using Node.js and TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
