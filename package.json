@@ -1,0 +1,28 @@
+{
+  "name": "whatsapp-sdk",
+  "version": "1.0.0",
+  "description": "SDK para WhatsApp Business API usando Node.js e TypeScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "api",
+    "sdk",
+    "typescript",
+    "meta"
+  ],
+  "author": "Sérgio Banhos",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^4.0.0"
+  }
+}
