@@ -1,5 +1,5 @@
 {
-  "name": "@sb/whatsapp-api-sdk",
+  "name": "@sergiobanhos/whatsapp-api-sdk",
   "version": "1.0.0",
   "description": "SDK for WhatsApp Business API using Node.js and TypeScript",
   "main": "dist/index.js",

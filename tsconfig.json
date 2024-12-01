@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-      "target": "ES6",
-      "module": "CommonJS",
-      "rootDir": "./src",
-      "outDir": "./dist",
-      "strict": false,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
+    "target": "ES6",  // O código JS gerado será compatível com ES6
+    "module": "CommonJS",  // Usado para gerar módulos do Node.js
+    "strict": false,  // Habilita as verificações estritas do TypeScript
+    "esModuleInterop": true,  // Permite importar pacotes CommonJS corretamente
+    "declaration": true,  // Gera os arquivos de declaração de tipos (.d.ts)
+    "outDir": "./dist",  // Diretório onde os arquivos compilados serão colocados
+    "rootDir": "./src",  // Diretório de origem do código
+    "skipLibCheck": true,  // Ignora verificações em arquivos de biblioteca
+    "resolveJsonModule": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*"  // Inclui todos os arquivos TypeScript na pasta src
+  ]
 }
