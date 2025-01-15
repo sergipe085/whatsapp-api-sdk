@@ -1,12 +1,11 @@
-import { createAxiosInstance } from './config';
+import { createAxiosInstance } from '../config';
 import { BaseClientConfig } from './types';
-import { MessageClient } from './clients/message.client';
-import { ContactClient } from './clients/contact.client';
-import { WebhookClient } from './clients/webhook.client';
-import { Request, Response } from 'express';
+import { MessageClient } from './modules/message.client';
+import { ContactClient } from './modules/contact.client';
+import { WebhookClient } from './modules/webhook.client';
 
 
-export class WhatsAppClient {
+export class WhatsappCloudApiClient {
     public messages: MessageClient;
     public contacts: ContactClient;
     public webhook: WebhookClient;
