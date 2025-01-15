@@ -161,7 +161,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 💬 Support
 
-For any questions or issues, please [open an issue](https://github.com/your-username/whatsapp-api-sdk/issues) or contact us at support@example.com.
+For any questions or issues, please [open an issue](https://github.com/sergipe085/whatsapp-api-sdk/issues) or contact us at sergiobanhosf@gmail.com.
 
 ---
 
