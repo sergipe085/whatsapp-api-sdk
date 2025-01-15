@@ -48,6 +48,7 @@ export interface MessageTemplateComponent {
     text?: string; // For HEADER, BODY, and FOOTER components
     buttons?: Array<MessageTemplateButton>; // For BUTTON components
     format?: 'TEXT' | 'IMAGE' | 'VIDEO' | 'DOCUMENT'; // Applicable for HEADER
+    example: any
 }
 
 /**
