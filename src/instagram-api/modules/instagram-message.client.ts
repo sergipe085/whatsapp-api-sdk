@@ -44,7 +44,7 @@ export class InstagramMessageClient {
      */
     async sendText(recipientId: string, message: string): Promise<MessageResponse> {
         try {
-            const response = await this.client.post<MessageResponse>('/messages', {
+            const response = await this.client.post<MessageResponse>('/me/messages', {
                 recipient: {
                     id: recipientId
                 },

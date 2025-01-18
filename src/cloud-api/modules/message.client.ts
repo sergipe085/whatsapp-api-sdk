@@ -112,6 +112,20 @@ export class MessageClient {
         }
     }
 
+    async readMessage(messageId: string) {
+        try {
+            // Prepare the body of the request with the reply buttons
+            const response = await this.client.post<MessageResponse>('/messages', {
+                messaging_product: 'whatsapp',
+                status: "read",
+                message_id: messageId
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error);
+        }
+    }
+
     // Error handling utility (can be expanded)
     private handleError(error: unknown) {
         if (this.onError) {
