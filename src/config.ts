@@ -5,7 +5,7 @@ import axios, { AxiosInstance } from 'axios';
  */
 export const createAxiosInstance = (token: string, id: string, apiUrl?: string): AxiosInstance => {
     if (!token || !id) {
-        throw new Error('Token and ID are required.');
+        console.error("TOKEN AND ID ARE REQUIRED");
     }
 
     return axios.create({
