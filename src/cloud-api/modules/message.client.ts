@@ -30,6 +30,12 @@ export interface CtaMessageOptions {
     button: CtaUrlButton; // A single CTA button
 }
 
+export interface TemplateMessageOptions {
+    to: string;
+    name: string;
+    language: string;
+}
+
 export class MessageClient {
     private client: AxiosInstance;
     private onError?: (error: unknown) => void;
@@ -105,6 +111,26 @@ export class MessageClient {
                         }
                     },
                 },
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error);
+        }
+    }
+
+    async sendTemplateMessage(options: TemplateMessageOptions): Promise<MessageResponse> {
+        try {
+            // Prepare the body of the request for the CTA URL message
+            const response = await this.client.post<MessageResponse>('/messages', {
+                messaging_product: 'whatsapp',
+                to: options.to,
+                type: 'template',
+                template: {
+                    name: options.name,
+                    language: {
+                        code: options.language
+                    }
+                }
             });
             return response.data;
         } catch (error) {
