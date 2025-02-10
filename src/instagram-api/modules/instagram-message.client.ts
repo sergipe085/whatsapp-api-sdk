@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { MessageResponse } from '../types';
+import { BaseClientConfig, MessageResponse } from '../types';
 export interface ReplyButton {
     type: 'reply';
     reply: {
@@ -34,9 +34,9 @@ export class InstagramMessageClient {
     private client: AxiosInstance;
     private onError?: (error: unknown) => void;
 
-    constructor(client: AxiosInstance, onError?: (error: unknown) => void) {
+    constructor(client: AxiosInstance, private config: BaseClientConfig) {
         this.client = client;
-        this.onError = onError;
+        this.onError = this.config.onError;
     }
 
     /**
@@ -44,7 +44,7 @@ export class InstagramMessageClient {
      */
     async sendText(recipientId: string, message: string): Promise<MessageResponse> {
         try {
-            const response = await this.client.post<MessageResponse>('/me/messages', {
+            const response = await this.client.post<MessageResponse>(`/${this.config.phoneNumberId}/messages`, {
                 recipient: {
                     id: recipientId
                 },
@@ -52,7 +52,7 @@ export class InstagramMessageClient {
             });
             return response.data;
         } catch (error) {
-            this.handleError(error);
+            this.handleError(error.response);
         }
     }
 
@@ -62,7 +62,7 @@ export class InstagramMessageClient {
     async sendButtonMessage(options: ButtonMessageOptions): Promise<MessageResponse> {
         try {
             // Prepare the body of the request with the reply buttons
-            const response = await this.client.post<MessageResponse>('/messages', {
+            const response = await this.client.post<MessageResponse>(`/${this.config.phoneNumberId}/messages`, {
                 messaging_product: 'whatsapp',
                 to: options.to,
                 type: 'interactive',
@@ -88,7 +88,7 @@ export class InstagramMessageClient {
     async sendCtaMessage(options: CtaMessageOptions): Promise<MessageResponse> {
         try {
             // Prepare the body of the request for the CTA URL message
-            const response = await this.client.post<MessageResponse>('/messages', {
+            const response = await this.client.post<MessageResponse>(`/${this.config.phoneNumberId}/messages`, {
                 messaging_product: 'whatsapp',
                 to: options.to,
                 type: 'interactive',
