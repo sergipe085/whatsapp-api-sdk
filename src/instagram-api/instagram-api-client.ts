@@ -13,9 +13,11 @@ export class InstagramApiClient {
 
     constructor(config: BaseClientConfig) {
         const axiosInstance = createAxiosInstance(config.token, config.phoneNumberId, "https://graph.instagram.com/v21.0");
+        const axiosInstanceFacebook = createAxiosInstance(config.token, config.phoneNumberId, "https://graph.instagram.com");
 
         this.messages = new InstagramMessageClient(axiosInstance, config);
-        this.users = new InstagramUserClient(axiosInstance, config);
+        this.users = new InstagramUserClient(axiosInstanceFacebook, config);
         this.posts = new InstagramPostClient(axiosInstance, config);
+        this.comments = new InstagramCommentClient(axiosInstance, config);
     }
 }
