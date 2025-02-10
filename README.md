@@ -2,22 +2,33 @@ Here’s a professional and polished README for your WhatsApp SDK, including all
 
 ---
 
-# WhatsApp API SDK
+# WhatsApp & Instagram API SDK
 
 [![npm version](https://badge.fury.io/js/%40sb%2Fwhatsapp-api-sdk.svg)](https://badge.fury.io/js/%40sb%2Fwhatsapp-api-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-The **WhatsApp API SDK** is a powerful and easy-to-use Node.js library for interacting with the official WhatsApp Cloud API. Designed for scalability and ease of use, it supports message sending, webhook integration, interactive buttons, and more—all with TypeScript typings for robust development.
+The **WhatsApp & Instagram API SDK** is a powerful and easy-to-use Node.js library for interacting with both the official WhatsApp Cloud API and Instagram Graph API. Designed for scalability and ease of use, it supports message sending, webhook integration, interactive buttons, Instagram messaging, comments, and more—all with TypeScript typings for robust development.
 
 ---
 
 ## ✨ Features
 
-- **Simple Configuration:** Initialize the client with minimal setup.
-- **Send Messages:** Text, media, templates, and interactive messages.
-- **Webhooks:** Built-in webhook handling for GET validation and POST callbacks.
-- **Interactive Buttons:** Send Call-to-Action (CTA) buttons and quick replies.
-- **TypeScript Support:** Includes complete TypeScript definitions for a seamless development experience.
+### WhatsApp Features
+- **Simple Configuration:** Initialize the client with minimal setup
+- **Send Messages:** Text, media, templates, and interactive messages
+- **Webhooks:** Built-in webhook handling for GET validation and POST callbacks
+- **Interactive Buttons:** Send Call-to-Action (CTA) buttons and quick replies
+
+### Instagram Features
+- **Message Management:** Send and receive Instagram DMs
+- **Comment Handling:** Manage Instagram post comments
+- **User Information:** Access Instagram user data and insights
+- **Post Management:** Handle Instagram posts and media
+
+### General Features
+- **TypeScript Support:** Complete TypeScript definitions for a seamless development experience
+- **Error Handling:** Comprehensive error management and logging
+- **Multi-platform:** Support for both WhatsApp and Instagram in a single SDK
 
 ---
 
@@ -33,29 +44,45 @@ npm install @sergiobanhos/whatsapp-api-sdk
 
 ## 🛠️ Usage
 
-### Initialize the Client
+### Initialize the WhatsApp Client
 
 ```typescript
-import WhatsAppClient from '@sb/whatsapp-api-sdk';
+import { WhatsappCloudApiClient, WhatsappBusinessApiClient } from '@sb/whatsapp-api-sdk';
 
-const client = new WhatsAppClient({
-  accessToken: 'your-meta-access-token',
-  verifyToken: 'your-webhook-verify-token',
-  onError: (error) => {
-    console.error('WhatsApp API Error:', error);
-  },
-  webhookCallback: (message) => {
-    console.log('Webhook received:', message);
-  },
+const { wa, waba } = getWhatsappApi({
+    whatsapp: {
+        accessToken: 'your-meta-access-token',
+        phoneNumberId: 'your-phone-number-id',
+        whatsappBusinessId: 'your-business-account-id'
+    }
 });
+
+// The wa client is for general WhatsApp Cloud API operations
+// The waba client is for WhatsApp Business API operations
 ```
 
 ---
 
-### Sending a Text Message
+### Initialize the Instagram Client
 
 ```typescript
-await client.sendTextMessage('<CUSTOMER_PHONE_NUMBER>', 'Hello from WhatsApp API SDK!');
+import { InstagramApiClient } from '@sb/whatsapp-api-sdk';
+
+const insta = new InstagramApiClient({
+    token: 'your-instagram-access-token',
+    phoneNumberId: 'your-instagram-user-id',
+    onError: (error) => console.error('Error:', JSON.stringify(error, null, 4)),
+});
+```
+
+### Sending a WhatsApp Text Message
+
+```typescript
+// Using WhatsApp Cloud API
+await wa.sendTextMessage('<CUSTOMER_PHONE_NUMBER>', 'Hello from WhatsApp API SDK!');
+
+// Using Instagram API
+await insta.sendMessage('<INSTAGRAM_USER_ID>', 'Hello from Instagram API SDK!');
 ```
 
 ---
@@ -123,7 +150,9 @@ app.listen(3000, () => {
 | `onError`      | `Function` | Callback for handling errors from the WhatsApp Cloud API.     |
 | `webhookCallback` | `Function` | Callback triggered when webhook events are received.      |
 
-### WhatsAppClient Methods
+### Available Methods
+
+#### WhatsApp Cloud API Methods
 
 | Method                | Description                                   |
 |-----------------------|-----------------------------------------------|
@@ -131,6 +160,16 @@ app.listen(3000, () => {
 | `sendButtonMessage`   | Sends a message with interactive buttons.    |
 | `sendCTAMessage`      | Sends a Call-to-Action message with links.   |
 | `setupWebhookRoutes`  | Sets up webhook validation and POST routes.  |
+
+#### Instagram API Methods
+
+| Method                | Description                                          |
+|-----------------------|------------------------------------------------------||
+| `sendMessage`         | Sends a message to an Instagram user                 |
+| `getComments`         | Retrieves comments from an Instagram post            |
+| `replyToComment`      | Replies to a specific Instagram comment              |
+| `getUserProfile`      | Gets information about an Instagram user             |
+| `getPost`             | Retrieves information about an Instagram post        |
 
 ---
 
